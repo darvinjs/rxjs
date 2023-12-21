@@ -1,4 +1,4 @@
-import { isKeyExpired } from ".";
+import { isKeyExpired } from "./index";
 
 describe('Compare and check expiry with current time', () => {
     const date = new Date();
