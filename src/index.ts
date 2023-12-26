@@ -32,9 +32,9 @@ export function invalidate(
 }
 
 export function update<Value>(
-  provider: ProviderType,
   key: string,
-  value: Value
+  value: Value,
+  provider: ProviderType = ProviderType.MEMORY,
 ) {
   try {
     const factory = providerFactory();
@@ -47,7 +47,8 @@ export function update<Value>(
       lastUpdated,
       expiry,
     };
-    return cache.set(key, newEntry);
+    cache.set(key, newEntry);
+    return newEntry;
   } catch (err) {
     throw new Error(`error while updating ${key} store: ${err}}`);
   }
@@ -56,7 +57,7 @@ export function update<Value>(
 export function init<T = unknown>(
   observable$: Observable<T>,
   key: string,
-  providerType = ProviderType.MEMORY,
+  providerType: ProviderType = ProviderType.MEMORY,
   maxAge?: number | undefined
 ): Observable<T> {
   try {
@@ -87,8 +88,8 @@ export function init<T = unknown>(
 }
 
 export function get<T>(
-  providerType: ProviderType,
-  key: string
+  key: string,
+  providerType: ProviderType = ProviderType.MEMORY,
 ): Observable<T> {
   try {
     const factory = providerFactory();

@@ -19,5 +19,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-  }
+  },
+  "ts-node": {
+    "esm": true, /* ... Line to be added ... */
+  } 
 }
